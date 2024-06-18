@@ -4,10 +4,10 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import SideNav from '@/components/SideNav'
 import { ArrowDownToLine } from 'lucide-react'
-import IconController from '@/components/IconController'
+
 import Icon_Preview from '@/components/Icon_Preview'
-import BackgroundController from '@/components/BackGroundController'
-import { ValueContext, ValuesContext } from '@/context/Context'
+
+import { ValuesContext } from '@/context/Context'
 import { useState } from 'react'
 const inter = Inter({ subsets: ['latin'] })
 

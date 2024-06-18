@@ -6,13 +6,13 @@ import { ValuesContext } from '@/context/Context'
 
 const BackgroundController = () => {
   const [IconValues, SetIconValues] = useContext(ValuesContext)
-  const StoredValue = JSON.parse(localStorage.getItem('BGValues'))
+  const StoredValue = JSON.parse(localStorage.getItem('Values'))
   const [Padding, setPadding] = useState(
-    IconValues ? IconValues.BG_Padding : 28
+    StoredValue ? StoredValue?.BG_Padding : 28
   )
-  const [Round, setRound] = useState(StoredValue ? StoredValue.BG_Round : 0)
+  const [Round, setRound] = useState(StoredValue ? StoredValue?.BG_Round : 0)
   const [color, setcolor] = useState(
-    StoredValue ? StoredValue.BGValues : 'rgba(255,255,255,1)'
+    StoredValue ? StoredValue?.BG_COLOR : 'rgba(255,255,255,1)'
   )
 
   useEffect(() => {
@@ -22,12 +22,9 @@ const BackgroundController = () => {
       BG_Round: Round,
       BG_COLOR: color,
     }
-    SetIconValues((prevIconValues) => ({
-      ...prevIconValues,
-      ...BGValues,
-    }))
-    localStorage.setItem('BGValues', JSON.stringify(BGValues))
-  }, [Padding, Round, color])
+    SetIconValues(BGValues)
+    localStorage.setItem('Values', JSON.stringify(BGValues))
+  }, [color, Padding, Round])
   console.log(IconValues)
   return (
     <div className=" flex flex-col  mx-3 gap-2 my-5">
@@ -41,9 +38,8 @@ const BackgroundController = () => {
         </div>
         <input
           type="range"
-          defaultValue={0}
           value={Padding}
-          max={40}
+          max={200}
           onChange={(e) => setPadding(e.target.value)}
         />
       </div>
@@ -53,10 +49,9 @@ const BackgroundController = () => {
           <p>{Round}°</p>
         </div>
         <input
-          defaultValue={0}
           value={Round}
           type="range"
-          max={70}
+          max={360}
           onChange={(e) => setRound(e.target.value)}
         />
       </div>

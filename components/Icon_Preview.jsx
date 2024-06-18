@@ -24,16 +24,16 @@ const Icon_Preview = () => {
   return (
     <div className=" flex flex-col  justify-center items-center">
       Icon Preview
-      <div className=" w-[300px] sm:w-[400px] flex justify-center items-center   h-[400px] bg-gray-400  mx-5 ">
+      <div
+        className={` w-[300px] sm:w-[400px] flex justify-center items-center  p-[90px]  h-[400px] bg-gray-400  mx-5`}
+      >
         <div
-          className={`w-full h-full  `}
+          className={`w-full h-full flex justify-center items-center   `}
           style={{
             background: IconValues?.BG_COLOR,
             borderRadius: `${IconValues?.BG_Round}px`,
-            padding: IconValues?.BG_Padding,
           }}
         >
-          {' '}
           <TheLogo
             name={'smile'}
             color={IconValues?.ICON_COLOR}
@@ -42,7 +42,6 @@ const Icon_Preview = () => {
           />
         </div>
       </div>
-      {IconValues.BG_COLOR}
     </div>
   )
 }

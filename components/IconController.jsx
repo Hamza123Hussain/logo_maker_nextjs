@@ -5,11 +5,16 @@ import ColourPicker from './ColourPickerController'
 import { ValuesContext } from '@/context/Context'
 
 const IconController = () => {
-  const [size, setsize] = useState(28)
-  const [rotate, setrotation] = useState(0)
-  const [color, setcolor] = useState('rgba(255,255,255,1)')
-  const [IconValues, SetIconValues] = useContext(ValuesContext)
   const StoredValue = JSON.parse(localStorage.getItem('Values'))
+  const [size, setsize] = useState(StoredValue ? StoredValue?.ICON_SIZE : 28)
+  const [rotate, setrotation] = useState(
+    StoredValue ? StoredValue.ICON_ROTATION : 0
+  )
+  const [color, setcolor] = useState(
+    StoredValue ? StoredValue.ICON_COLOR : 'rgba(255,255,255,1)'
+  )
+  const [IconValues, SetIconValues] = useContext(ValuesContext)
+
   console.log(IconValues)
   useEffect(() => {
     const IconValue = {
@@ -18,11 +23,8 @@ const IconController = () => {
       ICON_ROTATION: rotate,
       ICON_COLOR: color,
     }
-    SetIconValues((prevIconValues) => ({
-      ...prevIconValues,
-      ...IconValue,
-    }))
-    localStorage.setItem('Values', JSON.stringify(IconValues))
+    SetIconValues(IconValue)
+    localStorage.setItem('Values', JSON.stringify(IconValue))
   }, [size, rotate, color])
 
   return (
