@@ -1,23 +1,27 @@
 'use client'
 import { Smile } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ColourPicker from './ColourPickerController'
+import { ValuesContext } from '@/context/Context'
 
 const IconController = () => {
   const [size, setsize] = useState(28)
   const [rotate, setrotation] = useState(0)
   const [color, setcolor] = useState('rgba(255,255,255,1)')
-
+  const [IconValues, SetIconValues] = useContext(ValuesContext)
   const StoredValue = JSON.parse(localStorage.getItem('Values'))
-
+  console.log(IconValues)
   useEffect(() => {
-    const IconValues = {
+    const IconValue = {
       ...StoredValue,
       ICON_SIZE: size,
       ICON_ROTATION: rotate,
       ICON_COLOR: color,
     }
-
+    SetIconValues((prevIconValues) => ({
+      ...prevIconValues,
+      ...IconValue,
+    }))
     localStorage.setItem('Values', JSON.stringify(IconValues))
   }, [size, rotate, color])
 
