@@ -26,29 +26,29 @@ export default function RootLayout({ children }) {
           <>
             <Navbar />
             <main className=" md:pl-48">
-              <div className=" flex justify-end p-2 ">
+              <div className=" flex justify-end p-2 border-b-2 border-slate-100  ">
                 {' '}
                 <button
                   class="select-none rounded-lg bg-green-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                   type="button"
                 >
-                  <div className=" flex items-center gap-4">
+                  <div className=" flex items-center gap-4 ">
                     {' '}
                     <h3>Download</h3> <ArrowDownToLine />
                   </div>
                 </button>
               </div>
 
-              <div className=" p-5 flex flex-col   h-screen sm:grid mt-5 sm:grid-cols-6 gap-1">
-                <div className=" bg-pink-200 sm:col-span-2 border-r-2 border-black ">
+              <div className=" p-5 flex flex-col   h-screen sm:grid  sm:grid-cols-6 gap-1 ">
+                <div className="  sm:col-span-2 border-r-2 border-slate-100  ">
                   {' '}
                   <IconController />{' '}
                 </div>
 
-                <div className=" bg-green-400  sm:col-span-3">
+                <div className="  sm:col-span-3 border-r-2 border-slate-100">
                   <Icon_Preview />
                 </div>
-                <div className=" bg-fuchsia-600">Adsense</div>
+                <div className="">Adsense</div>
               </div>
             </main>
           </>
