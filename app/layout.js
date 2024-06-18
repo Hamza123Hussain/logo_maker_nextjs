@@ -5,6 +5,7 @@ import SideNav from '@/components/SideNav'
 import { ArrowDownToLine } from 'lucide-react'
 import IconController from '@/components/IconController'
 import Icon_Preview from '@/components/Icon_Preview'
+import BackgroundController from '@/components/BackGroundController'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -41,8 +42,7 @@ export default function RootLayout({ children }) {
 
               <div className=" p-5 flex flex-col   h-screen sm:grid  sm:grid-cols-6 gap-1 ">
                 <div className="  sm:col-span-2 border-r-2 border-slate-100  ">
-                  {' '}
-                  <IconController />{' '}
+                  {children}
                 </div>
 
                 <div className="  sm:col-span-3 border-r-2 border-slate-100">
