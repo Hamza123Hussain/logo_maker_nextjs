@@ -25,8 +25,8 @@ export default function RootLayout({ children }) {
           </div>
           <>
             <Navbar />
-            <main className=" md:pl-48">
-              <div className=" flex justify-end p-2 border-b-2 border-slate-100  ">
+            <main className=" md:pl-48 relative">
+              <div className=" flex justify-end p-2 border-b-2 border-slate-100   ">
                 {' '}
                 <button
                   class="select-none rounded-lg bg-green-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"

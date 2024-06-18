@@ -1,10 +1,26 @@
 'use client'
 import { Smile } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import ColourPicker from './ColourPickerController'
 
 const IconController = () => {
   const [size, setsize] = useState(28)
   const [rotate, setrotation] = useState(0)
+  const [color, setcolor] = useState('rgba(255,255,255,1)')
+
+  const StoredValue = JSON.parse(localStorage.getItem('Values'))
+
+  useEffect(() => {
+    const IconValues = {
+      ...StoredValue,
+      ICON_SIZE: size,
+      ICON_ROTATION: rotate,
+      ICON_COLOR: color,
+    }
+
+    localStorage.setItem('Values', JSON.stringify(IconValues))
+  }, [size, rotate, color])
+
   return (
     <div>
       <label>Icon</label>
@@ -22,6 +38,8 @@ const IconController = () => {
           </div>
           <input
             type="range"
+            defaultValue={28}
+            value={size}
             max={512}
             onChange={(e) => setsize(e.target.value)}
           />
@@ -32,10 +50,16 @@ const IconController = () => {
             <p>{rotate}°</p>
           </div>
           <input
+            defaultValue={0}
+            value={rotate}
             type="range"
             max={360}
             onChange={(e) => setrotation(e.target.value)}
           />
+        </div>
+
+        <div>
+          <ColourPicker selectedcolor={(color) => setcolor(color)} />
         </div>
       </div>
     </div>
