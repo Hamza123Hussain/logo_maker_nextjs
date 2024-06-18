@@ -13,6 +13,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }) {
   const [IconValues, SetIconValues] = useState({})
+  const [downloadicon, setdownloadicon] = useState()
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -35,7 +36,10 @@ export default function RootLayout({ children }) {
                   >
                     <div className=" flex items-center gap-4 ">
                       {' '}
-                      <h3>Download</h3> <ArrowDownToLine />
+                      <h3 onClick={() => setdownloadicon(Date.now())}>
+                        Download
+                      </h3>{' '}
+                      <ArrowDownToLine />
                     </div>
                   </button>
                 </div>
@@ -46,7 +50,7 @@ export default function RootLayout({ children }) {
                   </div>
 
                   <div className="  sm:col-span-3 border-r-2 border-slate-100">
-                    <Icon_Preview />
+                    <Icon_Preview downloadicon={downloadicon} />
                   </div>
                   <div className="">Adsense</div>
                 </div>
