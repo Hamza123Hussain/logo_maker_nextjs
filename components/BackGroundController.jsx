@@ -6,7 +6,11 @@ import { ValuesContext } from '@/context/Context'
 
 const BackgroundController = () => {
   const [IconValues, SetIconValues] = useContext(ValuesContext)
-  const StoredValue = JSON.parse(localStorage.getItem('Values'))
+  const isBrowser = typeof window !== 'undefined'
+  const StoredValue = isBrowser
+    ? JSON.parse(localStorage.getItem('Values'))
+    : null
+
   const [Padding, setPadding] = useState(
     StoredValue ? StoredValue?.BG_Padding : 28
   )
@@ -16,20 +20,24 @@ const BackgroundController = () => {
   )
 
   useEffect(() => {
-    const BGValues = {
-      ...StoredValue,
-      BG_Padding: Padding,
-      BG_Round: Round,
-      BG_COLOR: color,
+    if (isBrowser) {
+      const BGValues = {
+        ...StoredValue,
+        BG_Padding: Padding,
+        BG_Round: Round,
+        BG_COLOR: color,
+      }
+      SetIconValues(BGValues)
+      localStorage.setItem('Values', JSON.stringify(BGValues))
     }
-    SetIconValues(BGValues)
-    localStorage.setItem('Values', JSON.stringify(BGValues))
   }, [color, Padding, Round])
+
   console.log(IconValues)
+
   return (
-    <div className=" flex flex-col  mx-3 gap-2 my-5">
-      <div className=" flex flex-col ">
-        <div className="  flex justify-between ">
+    <div className="flex flex-col mx-3 gap-2 my-5">
+      <div className="flex flex-col">
+        {/* <div className="flex justify-between">
           <p>Padding</p>
           <p>
             {Padding}
@@ -40,22 +48,21 @@ const BackgroundController = () => {
           type="range"
           value={Padding}
           max={200}
-          onChange={(e) => setPadding(e.target.value)}
-        />
+          onChange={(e) => setPadding(Number(e.target.value))}
+        /> */}
       </div>
-      <div className=" flex flex-col ">
-        <div className=" flex justify-between">
+      <div className="flex flex-col">
+        <div className="flex justify-between">
           <p>Round</p>
-          <p>{Round}°</p>
+          <p>{`${Round}`}°</p>
         </div>
         <input
           value={Round}
           type="range"
           max={360}
-          onChange={(e) => setRound(e.target.value)}
+          onChange={(e) => setRound(Number(e.target.value))}
         />
       </div>
-
       <div>
         <ColourPicker selectedcolor={(color) => setcolor(color)} />
       </div>

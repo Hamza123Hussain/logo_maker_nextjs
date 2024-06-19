@@ -6,7 +6,10 @@ import { ValuesContext } from '@/context/Context'
 import IconList from './IconList'
 
 const IconController = () => {
-  const StoredValue = JSON.parse(localStorage.getItem('Values'))
+  const isBrowser = typeof window !== 'undefined'
+  const StoredValue = isBrowser
+    ? JSON.parse(localStorage.getItem('Values'))
+    : null
   const [size, setsize] = useState(StoredValue ? StoredValue?.ICON_SIZE : 28)
   const [rotate, setrotation] = useState(
     StoredValue ? StoredValue.ICON_ROTATION : 0
