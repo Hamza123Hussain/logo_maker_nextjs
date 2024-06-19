@@ -10,7 +10,13 @@ const Icon_Preview = ({ downloadicon }) => {
     const LudicIcon = icons[name]
 
     if (!LudicIcon) {
-      return
+      return (
+        <Smile
+          color={color}
+          size={size}
+          style={{ transform: `rotate(${rotation}deg)` }}
+        />
+      )
     }
     return (
       <>
@@ -53,7 +59,7 @@ const Icon_Preview = ({ downloadicon }) => {
           }}
         >
           <TheLogo
-            name={'Home'}
+            name={IconValues?.Icon_Name}
             color={IconValues?.ICON_COLOR}
             size={IconValues?.ICON_SIZE}
             rotation={IconValues?.ICON_ROTATION}

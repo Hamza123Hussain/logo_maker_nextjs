@@ -1,5 +1,5 @@
 'use client'
-import { Smile } from 'lucide-react'
+
 import React, { useContext, useEffect, useState } from 'react'
 import ColourPicker from './ColourPickerController'
 import { ValuesContext } from '@/context/Context'

@@ -11,32 +11,27 @@ const IconController = () => {
   const [rotate, setrotation] = useState(
     StoredValue ? StoredValue.ICON_ROTATION : 0
   )
-  const [icon, seticon] = useState(
-    StoredValue ? StoredValue?.Chosen_icon : 'Home'
-  )
+
   const [color, setcolor] = useState(
     StoredValue ? StoredValue.ICON_COLOR : 'rgba(255,255,255,1)'
   )
   const [IconValues, SetIconValues] = useContext(ValuesContext)
 
-  console.log(IconValues)
   useEffect(() => {
     const IconValue = {
-      ...StoredValue,
+      ...IconValues,
       ICON_SIZE: size,
       ICON_ROTATION: rotate,
       ICON_COLOR: color,
-      Chosen_icon: icon,
     }
     SetIconValues(IconValue)
     localStorage.setItem('Values', JSON.stringify(IconValue))
-  }, [size, rotate, color, icon])
+  }, [size, rotate, color])
 
-  console.log(icon)
   return (
     <div>
       <label>Icon</label>
-      <IconList selectedicon={(icon) => seticon(icon)} />
+      <IconList />
       <div className=" flex flex-col  mx-3 gap-2 my-5">
         <div className=" flex flex-col ">
           <div className="  flex justify-between ">

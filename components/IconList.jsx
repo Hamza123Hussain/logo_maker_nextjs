@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
   Dialog,
   DialogContent,
@@ -8,11 +8,33 @@ import {
   DialogTitle,
   DialogTrigger,
 } from './ui/dialog'
-import { Home, Smile, icons } from 'lucide-react'
+import { Smile, icons } from 'lucide-react'
 import { Iconss } from '@/constants/Icons'
+import { ValuesContext } from '@/context/Context'
 
-const IconList = ({ selectedicon }) => {
+const IconList = () => {
+  const [IconValues, SetIconValues] = useContext(ValuesContext)
+
   const [isopen, setopen] = useState(false)
+  const [iconname, setname] = useState('')
+  console.log(IconValues)
+
+  useEffect(() => {
+    const IconValue = {
+      ...IconValues,
+      Icon_Name: iconname,
+    }
+    SetIconValues(IconValue)
+  }, [iconname])
+
+  const ShowLogo = () => {
+    const LudicIcon = icons[iconname]
+
+    if (!LudicIcon) {
+      return <Smile color={'#3c3c3c'} size={20} />
+    }
+    return <LudicIcon color={'#3c3c3c'} size={20} />
+  }
 
   const TheLogo = ({ name }) => {
     const LudicIcon = icons[name]
@@ -25,7 +47,9 @@ const IconList = ({ selectedicon }) => {
   return (
     <div>
       <div className=" ml-2  p-3 flex items-center bg-gray-200 rounded-xl w-[50px] ">
-        <Home onClick={() => setopen(true)} />
+        <div onClick={() => setopen(true)}>
+          <ShowLogo />{' '}
+        </div>
       </div>
 
       <Dialog open={isopen}>
@@ -40,9 +64,9 @@ const IconList = ({ selectedicon }) => {
                     <div
                       className=" flex p-2 justify-center items-center cursor-pointer border-2 border-slate-700  self-center"
                       key={index}
-                      onChangeCapture={(icon) => {
-                        selectedicon(icon)
+                      onClick={() => {
                         setopen(false)
+                        setname(icon)
                       }}
                     >
                       <TheLogo name={icon} />
