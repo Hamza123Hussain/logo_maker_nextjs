@@ -6,7 +6,7 @@ import { ValuesContext } from '@/context/Context'
 
 const BackgroundController = () => {
   const [IconValues, SetIconValues] = useContext(ValuesContext)
-  const isBrowser = typeof window !== 'undefined'
+  const isBrowser = typeof window !== 'undefined' // this helps in removing the undefined local storage error when deploying
   const StoredValue = isBrowser
     ? JSON.parse(localStorage.getItem('Values'))
     : null

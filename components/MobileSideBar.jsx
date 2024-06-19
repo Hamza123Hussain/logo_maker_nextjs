@@ -9,7 +9,7 @@ const MobileSideBar = () => {
   return (
     <Sheet>
       <SheetTrigger>
-        <div className=" bg-gray-100  p-2">
+        <div className=" bg-transparent  p-2">
           <Menu />
         </div>
       </SheetTrigger>

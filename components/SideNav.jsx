@@ -25,12 +25,6 @@ const routes = [
     Icon: <Palette className=" text-black" />,
     href: '/Background',
   },
-  {
-    id: 3,
-    label: 'Upgrade',
-    Icon: <ShieldPlus className=" text-black" />,
-    href: '/Upgrade',
-  },
 ]
 
 const SideNav = () => {
@@ -54,7 +48,7 @@ const SideNav = () => {
                   {ele.Icon}
                   <h3
                     className={`text-sm ${
-                      pathname == ele.href ? 'text-green-200' : 'text-zinc-900'
+                      pathname == ele.href ? 'text-green-200 ' : 'text-zinc-900'
                     }`}
                   >
                     {' '}

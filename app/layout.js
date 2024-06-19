@@ -52,7 +52,7 @@ export default function RootLayout({ children }) {
                   <div className="  sm:col-span-3 border-r-2 border-slate-100">
                     <Icon_Preview downloadicon={downloadicon} />
                   </div>
-                  <div className="">Adsense</div>
+                  <div className="">Ads COME Here..................</div>
                 </div>
               </ValuesContext.Provider>
             </main>
