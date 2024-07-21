@@ -7,7 +7,7 @@ import { ArrowDownToLine } from 'lucide-react'
 
 import Icon_Preview from '@/components/Icon_Preview'
 
-import { ValuesContext } from '@/context/Context'
+import { ValuesContext, ValuesProvider } from '@/context/Context'
 import { useState } from 'react'
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
           <>
             <Navbar />
             <main className=" md:pl-48 relative">
-              <ValuesContext.Provider value={[IconValues, SetIconValues]}>
+              <ValuesProvider>
                 <div className=" flex justify-end p-2 border-b-2 border-slate-100   ">
                   {' '}
                   <button
@@ -54,7 +54,7 @@ export default function RootLayout({ children }) {
                   </div>
                   <div className="">Ads COME Here..................</div>
                 </div>
-              </ValuesContext.Provider>
+              </ValuesProvider>
             </main>
           </>
         </div>
