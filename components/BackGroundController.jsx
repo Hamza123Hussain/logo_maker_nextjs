@@ -49,7 +49,7 @@ const BackgroundController = () => {
         <input
           type="range"
           value={Width}
-          max={600}
+          max={300}
           onChange={(e) => setWidth(Number(e.target.value))}
         />
       </div>
