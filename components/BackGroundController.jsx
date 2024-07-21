@@ -10,7 +10,7 @@ const BackgroundController = () => {
 
   const [Width, setWidth] = useState(0)
   const [Round, setRound] = useState(0)
-  const [color, setcolor] = useState('rgba(255,255,255,1)')
+  const [color, setcolor] = useState('black')
   useEffect(() => {
     if (isBrowser) {
       const StoredValue = JSON.parse(localStorage.getItem('BG'))
