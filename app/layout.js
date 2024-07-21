@@ -9,10 +9,10 @@ import Icon_Preview from '@/components/Icon_Preview'
 
 import { ValuesContext, ValuesProvider } from '@/context/Context'
 import { useState } from 'react'
+import DownloadBtn from '@/components/DownloadBtn'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }) {
-  const [IconValues, SetIconValues] = useState({})
   const [downloadicon, setdownloadicon] = useState()
   return (
     <html lang="en">
@@ -29,19 +29,7 @@ export default function RootLayout({ children }) {
             <main className=" md:pl-48 relative">
               <ValuesProvider>
                 <div className=" flex justify-end p-2 border-b-2 border-slate-100   ">
-                  {' '}
-                  <button
-                    class="select-none rounded-lg bg-green-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                    type="button"
-                  >
-                    <div className=" flex items-center gap-4 ">
-                      {' '}
-                      <h3 onClick={() => setdownloadicon(Date.now())}>
-                        Download
-                      </h3>{' '}
-                      <ArrowDownToLine />
-                    </div>
-                  </button>
+                  <DownloadBtn />
                 </div>
 
                 <div className=" p-5 flex flex-col   h-screen sm:grid  sm:grid-cols-6 gap-1 ">
