@@ -5,7 +5,20 @@ import { Smile, icons } from 'lucide-react'
 import React, { useContext, useEffect } from 'react'
 
 const Icon_Preview = ({ downloadicon }) => {
-  const [IconValues] = useContext(ValuesContext)
+  const { iconValue, setIconValue } = useContext(ValuesContext)
+  const StoredValue = JSON.parse(localStorage.getItem('Icon'))
+  const { backgroundValue, setBackgroundValue } = useContext(ValuesContext)
+  const StoredValue2 = JSON.parse(localStorage.getItem('BG'))
+  useEffect(() => {
+    if (StoredValue) {
+      setIconValue(StoredValue)
+    }
+    if (StoredValue2) {
+      setBackgroundValue(StoredValue2)
+      console.log(StoredValue2.Padding)
+    }
+  }, [])
+
   const TheLogo = ({ name, color, size, rotation }) => {
     const LudicIcon = icons[name]
 
@@ -44,26 +57,30 @@ const Icon_Preview = ({ downloadicon }) => {
   if (downloadicon) {
     DownloadPngLogo()
   }
+
   return (
     <div className=" flex flex-col  justify-center items-center">
-      Icon Preview
-      <div
-        className={` w-[300px] sm:w-[400px] flex justify-center items-center  p-[90px]  h-[400px] bg-gray-400  mx-5`}
-      >
+      <h1 className=" text-2xl font-bold my-10">Icon Preview</h1>
+      <div>
         <div
-          id="DownloadLogo"
-          className={`w-full h-full flex justify-center items-center   `}
+          className={`w-[100vw] sm:w-[40vw] h-[80vh] flex justify-center items-center     bg-gray-400  mx-5`}
           style={{
-            background: IconValues?.BG_COLOR,
-            borderRadius: `${IconValues?.BG_Round}px`,
+            backgroundColor: backgroundValue.color,
+            borderRadius: backgroundValue.Round,
+            width: backgroundValue.Width,
           }}
         >
-          <TheLogo
-            name={IconValues?.Icon_Name}
-            color={IconValues?.ICON_COLOR}
-            size={IconValues?.ICON_SIZE}
-            rotation={IconValues?.ICON_ROTATION}
-          />
+          <div
+            id="DownloadLogo"
+            className={`w-full h-full flex justify-center items-center   `}
+          >
+            <TheLogo
+              name={iconValue?.Name}
+              color={iconValue?.Color}
+              size={iconValue?.Size}
+              rotation={iconValue?.Rotate}
+            />
+          </div>
         </div>
       </div>
     </div>
