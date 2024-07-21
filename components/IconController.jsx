@@ -1,71 +1,76 @@
 'use client'
-import { Smile } from 'lucide-react'
+
 import React, { useContext, useEffect, useState } from 'react'
 import ColourPicker from './ColourPickerController'
 import { ValuesContext } from '@/context/Context'
 import IconList from './IconList'
 
 const IconController = () => {
-  const isBrowser = typeof window !== 'undefined'
-  const StoredValue = isBrowser
-    ? JSON.parse(localStorage.getItem('Values'))
-    : null
-  const [size, setsize] = useState(StoredValue ? StoredValue?.ICON_SIZE : 28)
-  const [rotate, setrotation] = useState(
-    StoredValue ? StoredValue.ICON_ROTATION : 0
-  )
+  const { iconValue, setIconValue } = useContext(ValuesContext)
 
-  const [color, setcolor] = useState(
-    StoredValue ? StoredValue.ICON_COLOR : 'rgba(255,255,255,1)'
-  )
-  const [IconValues, SetIconValues] = useContext(ValuesContext)
+  const StoredValue = JSON.parse(localStorage.getItem('Icon'))
+
+  const [size, setSize] = useState(28)
+  const [rotate, setRotate] = useState(0)
+  const [color, setColor] = useState('rgba(255,255,255,1)')
+
+  // Load stored values on mount
+  useEffect(() => {
+    if (StoredValue) {
+      setSize(StoredValue.Size || 28)
+      setRotate(StoredValue.Rotate || 0)
+      setColor(StoredValue.Color || 'rgba(255,255,255,1)')
+      setIconValue(StoredValue)
+    }
+  }, [])
+
+  // Save icon value to localStorage when it changes
+  useEffect(() => {
+    setIconValue((prevValue) => ({
+      ...prevValue,
+      Size: size,
+      Rotate: rotate,
+      Color: color,
+    }))
+  }, [size, rotate, color])
 
   useEffect(() => {
-    const IconValue = {
-      ...IconValues,
-      ICON_SIZE: size,
-      ICON_ROTATION: rotate,
-      ICON_COLOR: color,
+    if (iconValue) {
+      localStorage.setItem('Icon', JSON.stringify(iconValue))
     }
-    SetIconValues(IconValue)
-    localStorage.setItem('Values', JSON.stringify(IconValue))
-  }, [size, rotate, color])
+  }, [iconValue])
 
   return (
     <div>
       <label>Icon</label>
       <IconList />
-      <div className=" flex flex-col  mx-3 gap-2 my-5">
-        <div className=" flex flex-col ">
-          <div className="  flex justify-between ">
+      <div className="flex flex-col mx-3 gap-2 my-5">
+        <div className="flex flex-col">
+          <div className="flex justify-between">
             <p>Size</p>
-            <p>
-              {size}
-              px
-            </p>
+            <p>{size}px</p>
           </div>
           <input
             type="range"
             value={size}
-            max={512}
-            onChange={(e) => setsize(e.target.value)}
+            max={200}
+            onChange={(e) => setSize(e.target.value)}
           />
         </div>
-        <div className=" flex flex-col ">
-          <div className=" flex justify-between">
+        <div className="flex flex-col">
+          <div className="flex justify-between">
             <p>Rotate</p>
             <p>{rotate}°</p>
           </div>
           <input
-            value={rotate}
             type="range"
+            value={rotate}
             max={360}
-            onChange={(e) => setrotation(e.target.value)}
+            onChange={(e) => setRotate(e.target.value)}
           />
         </div>
-
         <div>
-          <ColourPicker selectedcolor={(color) => setcolor(color)} />
+          <ColourPicker selectedcolor={(color) => setColor(color)} />
         </div>
       </div>
     </div>

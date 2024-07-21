@@ -13,18 +13,24 @@ import { Iconss } from '@/constants/Icons'
 import { ValuesContext } from '@/context/Context'
 
 const IconList = () => {
-  const [IconValues, SetIconValues] = useContext(ValuesContext)
+  const { iconValue, setIconValue } = useContext(ValuesContext)
+  const StoredValue = JSON.parse(localStorage.getItem('Icon'))
+  useEffect(() => {
+    if (StoredValue) {
+      setIconValue(StoredValue)
+    }
+  }, [])
 
   const [isopen, setopen] = useState(false)
   const [iconname, setname] = useState('')
-  console.log(IconValues)
 
   useEffect(() => {
-    const IconValue = {
-      ...IconValues,
-      Icon_Name: iconname,
-    }
-    SetIconValues(IconValue)
+    setIconValue((element) => ({
+      ...element,
+      Name: iconname,
+    }))
+
+    localStorage.setItem('Icon', JSON.stringify(iconValue))
   }, [iconname])
 
   const ShowLogo = () => {
