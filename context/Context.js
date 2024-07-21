@@ -7,10 +7,18 @@ export const ValuesContext = createContext()
 export const ValuesProvider = ({ children }) => {
   const [backgroundValue, setBackgroundValue] = useState({})
   const [iconValue, setIconValue] = useState({})
+  const [downloadicon, setdownloadicon] = useState(false)
 
   return (
     <ValuesContext.Provider
-      value={{ backgroundValue, setBackgroundValue, iconValue, setIconValue }}
+      value={{
+        backgroundValue,
+        setBackgroundValue,
+        iconValue,
+        setIconValue,
+        downloadicon,
+        setdownloadicon,
+      }}
     >
       {children}
     </ValuesContext.Provider>
