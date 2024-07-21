@@ -15,12 +15,14 @@ import { ValuesContext } from '@/context/Context'
 const IconList = () => {
   const isBrowser = typeof window !== 'undefined'
   const { iconValue, setIconValue } = useContext(ValuesContext)
-  const StoredValue = JSON.parse(localStorage.getItem('Icon'))
+
   useEffect(() => {
-    if (isBrowser)
+    if (isBrowser) {
+      const StoredValue = JSON.parse(localStorage.getItem('Icon'))
       if (StoredValue) {
         setIconValue(StoredValue)
       }
+    }
   }, [])
 
   const [isopen, setopen] = useState(false)
