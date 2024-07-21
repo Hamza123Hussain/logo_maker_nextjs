@@ -1,14 +1,20 @@
 'use client'
 import { ValuesContext } from '@/context/Context'
 import html2canvas from 'html2canvas'
-import { Smile, icons } from 'lucide-react'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
+import { TheLogo } from './Logo'
 
-const Icon_Preview = ({ downloadicon }) => {
-  const { iconValue, setIconValue } = useContext(ValuesContext)
+const Icon_Preview = () => {
+  const {
+    iconValue,
+    setIconValue,
+    backgroundValue,
+    setBackgroundValue,
+    downloadicon,
+    setdownloadicon,
+  } = useContext(ValuesContext)
   const isBrowser = typeof window !== 'undefined'
-
-  const { backgroundValue, setBackgroundValue } = useContext(ValuesContext)
+  const downloadRef = useRef(null)
 
   useEffect(() => {
     if (isBrowser) {
@@ -24,43 +30,22 @@ const Icon_Preview = ({ downloadicon }) => {
     }
   }, [])
 
-  const TheLogo = ({ name, color, size, rotation }) => {
-    const LudicIcon = icons[name]
-
-    if (!LudicIcon) {
-      return (
-        <Smile
-          color={color}
-          size={size}
-          style={{ transform: `rotate(${rotation}deg)` }}
-        />
-      )
+  useEffect(() => {
+    if (downloadicon) {
+      DownloadPngLogo()
     }
-    return (
-      <>
-        <LudicIcon
-          color={color}
-          size={size}
-          style={{ transform: `rotate(${rotation}deg)` }}
-        />
-      </>
-    )
-  }
+  }, [downloadicon])
 
   const DownloadPngLogo = () => {
-    const DownloadDiv = document.getElementById('DownloadLogo')
-    html2canvas(DownloadDiv, {
-      backgroundColor: null,
-    }).then((canvas) => {
-      const PngImage = canvas.toDataURL('image/png')
-      const DownloadLink = document.createElement('a')
-      DownloadLink.href = PngImage
-      DownloadLink.download = 'The_Logo_Maker.png'
-      DownloadLink.click()
-    })
-  }
-  if (downloadicon) {
-    DownloadPngLogo()
+    if (downloadRef.current) {
+      html2canvas(downloadRef.current).then((canvas) => {
+        const link = document.createElement('a')
+        link.href = canvas.toDataURL('image/png')
+        link.download = 'download.png'
+        link.click()
+      })
+    }
+    setdownloadicon(false)
   }
 
   return (
@@ -69,6 +54,7 @@ const Icon_Preview = ({ downloadicon }) => {
       <div>
         <div
           id="DownloadLogo"
+          ref={downloadRef}
           className={`w-[100vw] sm:w-[40vw] h-[80vh] flex justify-center items-center     bg-gray-400  mx-5`}
           style={{
             backgroundColor: backgroundValue.color,
