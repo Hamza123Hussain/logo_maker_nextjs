@@ -68,6 +68,7 @@ const Icon_Preview = ({ downloadicon }) => {
       <h1 className=" text-2xl font-bold my-10">Icon Preview</h1>
       <div>
         <div
+          id="DownloadLogo"
           className={`w-[100vw] sm:w-[40vw] h-[80vh] flex justify-center items-center     bg-gray-400  mx-5`}
           style={{
             backgroundColor: backgroundValue.color,
@@ -75,10 +76,7 @@ const Icon_Preview = ({ downloadicon }) => {
             width: backgroundValue.Width,
           }}
         >
-          <div
-            id="DownloadLogo"
-            className={`w-full h-full flex justify-center items-center   `}
-          >
+          <div className={`w-full h-full flex justify-center items-center   `}>
             <TheLogo
               name={iconValue?.Name}
               color={iconValue?.Color}
