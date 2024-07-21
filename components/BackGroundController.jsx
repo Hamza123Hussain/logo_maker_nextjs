@@ -6,18 +6,19 @@ import { ValuesContext } from '@/context/Context'
 
 const BackgroundController = () => {
   const { backgroundValue, setBackgroundValue } = useContext(ValuesContext)
-
+  const isBrowser = typeof window !== 'undefined'
   const StoredValue = JSON.parse(localStorage.getItem('BG'))
   const [Width, setWidth] = useState(0)
   const [Round, setRound] = useState(0)
   const [color, setcolor] = useState('rgba(255,255,255,1)')
   useEffect(() => {
-    if (StoredValue) {
-      setRound(StoredValue.Round || 28)
-      setWidth(StoredValue.Width || 0)
-      setcolor(StoredValue.color || 'rgba(255,255,255,1)')
-      setBackgroundValue(StoredValue)
-    }
+    if (isBrowser)
+      if (StoredValue) {
+        setRound(StoredValue.Round || 28)
+        setWidth(StoredValue.Width || 0)
+        setcolor(StoredValue.color || 'rgba(255,255,255,1)')
+        setBackgroundValue(StoredValue)
+      }
   }, [])
 
   useEffect(() => {

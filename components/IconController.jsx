@@ -7,7 +7,7 @@ import IconList from './IconList'
 
 const IconController = () => {
   const { iconValue, setIconValue } = useContext(ValuesContext)
-
+  const isBrowser = typeof window !== 'undefined'
   const StoredValue = JSON.parse(localStorage.getItem('Icon'))
 
   const [size, setSize] = useState(28)
@@ -16,12 +16,13 @@ const IconController = () => {
 
   // Load stored values on mount
   useEffect(() => {
-    if (StoredValue) {
-      setSize(StoredValue.Size || 28)
-      setRotate(StoredValue.Rotate || 0)
-      setColor(StoredValue.Color || 'rgba(255,255,255,1)')
-      setIconValue(StoredValue)
-    }
+    if (isBrowser)
+      if (StoredValue) {
+        setSize(StoredValue.Size || 28)
+        setRotate(StoredValue.Rotate || 0)
+        setColor(StoredValue.Color || 'rgba(255,255,255,1)')
+        setIconValue(StoredValue)
+      }
   }, [])
 
   // Save icon value to localStorage when it changes

@@ -6,16 +6,19 @@ import React, { useContext, useEffect } from 'react'
 
 const Icon_Preview = ({ downloadicon }) => {
   const { iconValue, setIconValue } = useContext(ValuesContext)
+  const isBrowser = typeof window !== 'undefined'
   const StoredValue = JSON.parse(localStorage.getItem('Icon'))
   const { backgroundValue, setBackgroundValue } = useContext(ValuesContext)
   const StoredValue2 = JSON.parse(localStorage.getItem('BG'))
   useEffect(() => {
-    if (StoredValue) {
-      setIconValue(StoredValue)
-    }
-    if (StoredValue2) {
-      setBackgroundValue(StoredValue2)
-      console.log(StoredValue2.Padding)
+    if (isBrowser) {
+      if (StoredValue) {
+        setIconValue(StoredValue)
+      }
+      if (StoredValue2) {
+        setBackgroundValue(StoredValue2)
+        console.log(StoredValue2.Padding)
+      }
     }
   }, [])
 
