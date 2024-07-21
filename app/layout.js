@@ -1,19 +1,13 @@
-'use client'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import SideNav from '@/components/SideNav'
-import { ArrowDownToLine } from 'lucide-react'
-
 import Icon_Preview from '@/components/Icon_Preview'
-
-import { ValuesContext, ValuesProvider } from '@/context/Context'
-import { useState } from 'react'
+import { ValuesProvider } from '@/context/Context'
 import DownloadBtn from '@/components/DownloadBtn'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }) {
-  const [downloadicon, setdownloadicon] = useState()
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -38,7 +32,7 @@ export default function RootLayout({ children }) {
                   </div>
 
                   <div className="  sm:col-span-3 border-r-2 border-slate-100">
-                    <Icon_Preview downloadicon={downloadicon} />
+                    <Icon_Preview />
                   </div>
                   <div className="">Ads COME Here..................</div>
                 </div>
